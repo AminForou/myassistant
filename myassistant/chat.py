@@ -1,21 +1,15 @@
 import streamlit as st
 import openai
-import toml
-
-# Load secrets from the .streamlit/secrets.toml file
-secrets = toml.load(".streamlit/secrets.toml")
-
-# Debug statement to check loaded secrets
-# st.write(secrets)  # Uncomment this to check the secrets
+import os
 
 # Set up OpenAI client
-client = openai.OpenAI(api_key=secrets["secrets"]["OPENAI_API_KEY"])
+client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 
 # Password protection
 def check_password():
     def password_entered():
-        if st.session_state["password"] == secrets["secrets"]["app_password"]:
+        if st.session_state["password"] == os.getenv("APP_PASSWORD"):
             st.session_state["password_correct"] = True
             del st.session_state["password"]  # don't store password
         else:
