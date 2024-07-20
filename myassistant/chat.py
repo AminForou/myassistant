@@ -2,8 +2,16 @@ import streamlit as st
 import openai
 import os
 
+# Debug: Print environment variables (for testing purposes only, remove in production)
+st.write("OPENAI_API_KEY:", os.getenv("OPENAI_API_KEY"))
+st.write("APP_PASSWORD:", os.getenv("APP_PASSWORD"))
+
 # Set up OpenAI client
-client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+api_key = os.getenv("OPENAI_API_KEY")
+if api_key is None:
+    raise ValueError("The OPENAI_API_KEY environment variable is not set")
+
+client = openai.OpenAI(api_key=api_key)
 
 
 # Password protection
