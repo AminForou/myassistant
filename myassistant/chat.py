@@ -2,10 +2,6 @@ import streamlit as st
 import openai
 import os
 
-# Debug: Print environment variables (for testing purposes only, remove in production)
-st.write("OPENAI_API_KEY:", os.getenv("OPENAI_API_KEY"))
-st.write("APP_PASSWORD:", os.getenv("APP_PASSWORD"))
-
 # Set up OpenAI client
 api_key = os.getenv("OPENAI_API_KEY")
 if api_key is None:
